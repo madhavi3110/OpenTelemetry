@@ -1,16 +1,47 @@
 --- 
 apiVersion: v1
-kind: Pod
-metadata: 
+kind: Namespace
+metadata:
+  name: zipkin
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: zipkin-deployment
+  namespace: zipkin
+spec:
+  selector:
+    matchLabels:
+      app: zipkin
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: zipkin
+    spec:
+      containers:
+      - name: zipkin
+        resources:
+          limits:
+            ephemeral-storage: 1Gi
+          requests:
+            ephemeral-storage: 500Mi
+        image: openzipkin/zipkin:2.21.7
+        ports:
+        - containerPort: 9411
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: zipkin-svc
+  namespace: zipkin
   labels: 
     app: zipkin
-  name: zipkin
-spec: 
-  containers: 
-    - 
-      image: openzipkin/zipkin
-      name: zipkin
-      readinessProbe: 
-        httpGet: 
-          path: /api/v1/services
-          port: 9411
+spec:
+  selector:
+      app: zipkin
+  type: NodePort
+  ports:
+  - port: 9411
+    nodePort: 30411
