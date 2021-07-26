@@ -3,7 +3,7 @@ kind: Pod
 metadata:
   name: zipkin
     labels:
-    app: zipkin
+      app: zipkin
 spec:
   containers:
     - image: openzipkin/zipkin
