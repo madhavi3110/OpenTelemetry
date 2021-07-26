@@ -10,5 +10,7 @@ spec:
     - 
       image: openzipkin/zipkin
       name: zipkin
-      ports: 
-        - 9411:9411
+      readinessProbe: 
+        httpGet: 
+          path: /api/v1/services
+          port: 9411
