@@ -6,6 +6,7 @@
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
     4  sudo apt-get update
     5  sudo apt-get install docker-ce docker-ce-cli containerd.io
+    ## Kubernetes Installing
     6  sudo apt-get update
     7  sudo apt-get install -y apt-transport-https ca-certificates curl
     8  sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
@@ -16,7 +17,8 @@
    
    ##### The follwoing commands has to execute in Master node.
    
-   kubeadm init (Run as Root user and get the information from the output and the join command need to run on Worker node) 
+   kubeadm init (Only Init has to Run as Root user and get the information from the output and the join command need to run on Worker node) 
+   # the belwo commands run as normal user
    mkdir -p $HOME/.kube
    sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
    sudo chown $(id -u):$(id -g) $HOME/.kube/config

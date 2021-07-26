@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: zipkin
+spec:
+  containers:
+    - image: openzipkin/zipkin
+      name: gol
+      ports:
+        - containerPort: 9411
+          name: zipkinhttpport
+          protocol: TCP
