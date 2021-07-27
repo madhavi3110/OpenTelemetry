@@ -1,47 +1,23 @@
---- 
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: zipkin1
----
 apiVersion: apps/v1
-kind: Deployment
+kind: ReplicaSet
 metadata:
-  name: zipkin-deployment
-  namespace: zipkin1
+  name: zipkin-qa
 spec:
+  minReadySeconds: 10
+  replicas: 1
   selector:
     matchLabels:
-      app: zipkin1
-  replicas: 1
+      app: zipkin
+      env: qa
   template:
     metadata:
       labels:
-        app: zipkin1
+        app: zipkin
+        env: qa
     spec:
       containers:
-      - name: zipkin1
-        resources:
-          limits:
-            ephemeral-storage: 1Gi
-          requests:
-            ephemeral-storage: 500Mi
-        image: openzipkin/zipkin:2.21.7
-        ports:
-        - containerPort: 9411
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: zipkin-svc
-  namespace: zipkin1
-  labels: 
-    app: zipkin1
-spec:
-  selector:
-      app: zipkin1
-  type: NodePort
-  ports:
-  - port: 9411
-    nodePort: 30411
+        - image: openzipkin/zipkin
+          name: zipkin-qa
+          ports:
+            - containerPort: 9411
+              protocol: TCP 
