@@ -1,0 +1,16 @@
+---
+apiVersion: dapr.io/v1alpha1
+kind: Component
+metadata:
+  name: zipkin
+  namespace: default
+spec:
+  annotations:
+    dapr.io/config: "tracing"
+  type: exporters.zipkin
+  version: v1
+  metadata:
+  - name: enabled
+    value: "true"
+  - name: exporterAddress
+    value: "http://13.127.232.9:32765/api/v2/spans"
