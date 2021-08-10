@@ -23,7 +23,7 @@ spec:
         version: "1.0"
     spec:
       containers:
-        - image: cicdcontainer/springpetclinic:1.0
+        - image: svikram01/springpet:latest
           name: springpetclinic
           ports:
             - containerPort: 8080
