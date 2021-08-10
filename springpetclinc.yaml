@@ -2,7 +2,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: spirng-petclinic
+  name: sspingpetclinc
   labels:
     app: spingpetclinc
 spec:
@@ -19,12 +19,12 @@ spec:
   template:
     metadata:
       labels:
-        app: gameoflife
+        app: spingpetclinc
         version: "1.0"
     spec:
       containers:
-        - image: priyarani94/springpetclinic:latest
-          name: gol-dev
+        - image: cicdcontainer/springpetclinic:1.0
+          name: spingpetclinc
           ports:
             - containerPort: 8080
               protocol: TCP 
@@ -36,7 +36,7 @@ metadata:
 spec:
   type: NodePort
   selector:
-    app: gameoflife
+    app: spingpetclinc
   ports:
     - targetPort: 8080
       port: 8080
