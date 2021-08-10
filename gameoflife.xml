@@ -6,7 +6,7 @@ metadata:
   labels:
     app: gameoflife
 spec:
-  replicas: 3
+  replicas: 1
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -34,7 +34,7 @@ kind: Service
 metadata:
   name: gol-dev
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: gameoflife
   ports:
