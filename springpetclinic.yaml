@@ -2,9 +2,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: sspingpetclinc
+  name: springpetclinic
   labels:
-    app: spingpetclinc
+    app: springpetclinic
 spec:
   replicas: 1
   strategy:
@@ -14,7 +14,7 @@ spec:
       maxUnavailable: 1
   selector:
     matchLabels:
-      app: spingpetclinc
+      app: springpetclinic
       version: "1.0"
   template:
     metadata:
@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
         - image: cicdcontainer/springpetclinic:1.0
-          name: spingpetclinc
+          name: springpetclinic
           ports:
             - containerPort: 8080
               protocol: TCP 
@@ -32,11 +32,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: spingpetclinc
+  name: springpetclinic
 spec:
   type: NodePort
   selector:
-    app: spingpetclinc
+    app: springpetclinic
   ports:
     - targetPort: 8080
       port: 8080
